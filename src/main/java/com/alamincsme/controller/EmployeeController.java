@@ -17,7 +17,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService ;
 
-    @GetMapping("/admin/employees")
+    @GetMapping("/employees")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployee() {
         var employeeDTOs = employeeService.getAllEmployee();
         return new ResponseEntity<>(employeeDTOs, HttpStatus.FOUND);

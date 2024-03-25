@@ -4,6 +4,7 @@ import com.alamincsme.exception.EmployeeNotFoundException;
 import com.alamincsme.model.Employee;
 import com.alamincsme.repository.EmployeeRepo;
 import com.alamincsme.domain.EmployeeDTO;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
+
     @Autowired
     private EmployeeRepo employeeRepo ;
 
@@ -38,12 +40,14 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+    @Transactional
     public EmployeeDTO addEmployee(Employee employee) {
         Employee saveEmployee = employeeRepo.save(employee);
         return modelMapper.map(saveEmployee, EmployeeDTO.class);
     }
 
     @Override
+    @Transactional
     public EmployeeDTO updateEmployee(Long id, Employee employee) throws EmployeeNotFoundException {
         Employee employeeDB = employeeRepo
                 .findById(id).orElseThrow(
@@ -61,6 +65,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+    @Transactional
     public String deleteEmployee(Long id) throws EmployeeNotFoundException {
         Employee employee = employeeRepo.findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException("Employee does not exist !!"));
