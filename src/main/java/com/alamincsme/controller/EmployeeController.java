@@ -31,7 +31,7 @@ public class EmployeeController {
 
     @PostMapping("/admin/employee")
     public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody Employee employee){
-        EmployeeDTO employeeDTO = employeeService.addEmployee(employee);
+        var employeeDTO = employeeService.addEmployee(employee);
         return new ResponseEntity<EmployeeDTO>(employeeDTO, HttpStatus.CREATED);
     }
 
@@ -44,7 +44,7 @@ public class EmployeeController {
 
     @DeleteMapping("/admin/delete/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable Long id) throws EmployeeNotFoundException {
-        String status = employeeService.deleteEmployee(id);
+        var status = employeeService.deleteEmployee(id);
         return new ResponseEntity<>(status, HttpStatus.OK);
 
     }
